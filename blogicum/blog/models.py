@@ -62,7 +62,6 @@ class Post(BaseBlog):
         User,
         on_delete=models.CASCADE,
         verbose_name='Автор публикации',
-        related_name='authors'
     )
     location = models.ForeignKey(
         Location,
@@ -70,14 +69,12 @@ class Post(BaseBlog):
         null=True,
         blank=True,
         verbose_name='Местоположение',
-        related_name='locations'
     )
     category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
         null=True,
         verbose_name='Категория',
-        related_name='posts'
     )
     title = models.CharField(
         max_length=TITLE_MAX_LENGTH, verbose_name='Заголовок'
@@ -94,6 +91,7 @@ class Post(BaseBlog):
         ordering = ['created_at']
         verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
+        default_related_name = 'posts'
 
     def __str__(self):
         return self.title
